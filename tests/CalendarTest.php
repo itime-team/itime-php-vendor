@@ -8,5 +8,4 @@ class CalendarTest extends \PHPUnit_Framework_TestCase{
         $r = $cls->say();
         $this->assertEquals($r, 'yinchuandong');
     }
-
 }

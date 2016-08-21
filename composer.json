@@ -23,6 +23,11 @@
         "psr-4": {
             "ITime\\Calendar\\": "src/"
         }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ITime\\Calendar\\Tests\\": "tests/"
+        }
     }
 
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace ITime;
+namespace ITime\Calendar;
 
 class ITimeFactory {
 

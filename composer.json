@@ -26,7 +26,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "ITime\\Calendar\\Tests\\": "tests/"
+            "ITime\\Calendar\\Test\\": "tests/"
         }
     }
 

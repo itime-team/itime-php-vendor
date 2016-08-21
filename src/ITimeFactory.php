@@ -8,7 +8,7 @@ class ITimeFactory {
 
     }
 
-    function say(){
-        echo 'say hello';
+    public function say(){
+        return 'yinchuandong';
     }
 }

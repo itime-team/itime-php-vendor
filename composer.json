@@ -1,0 +1,15 @@
+{
+    "name": "yinchuandong/itime-unicalendar",
+    "description": "itime univeristy calendar",
+    "type": "library",
+    "require": {
+        "guzzlehttp/guzzle": "^6.2"
+    },
+    "authors": [
+        {
+            "name": "yinchuandong",
+            "email": "yincd520@sina.com"
+        }
+    ],
+    "minimum-stability": "dev"
+}

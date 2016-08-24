@@ -21,7 +21,7 @@ class LibUniMelb implements ITimeCalendar{
         $appParam = ['appkey' => 'mobile', 'appsecret' => 'mobile'];
         $this->reqHeaders['body'] = json_encode($appParam);
         try{
-            $this->response = $this->client->post('/auth/app/login', $this->reqHeaders);
+            $response = $this->client->post('/auth/app/login', $this->reqHeaders);
         } catch (ClientException $ce){
             $statusCode = $ce->getResponse()->getStatusCode();
             $statusMsg = $ce->getResponse()->getReasonPhrase();
@@ -30,9 +30,13 @@ class LibUniMelb implements ITimeCalendar{
             // other error
         }
 
-        $this->reqHeaders['body'] = json_encode(['username'=>'mingyanx', 'password'=>'xmy15234', 'platform'=>'ios', 'device'=>'']);
+        $this->reqHeaders['body'] = json_encode([
+            'username'=>$userId, 
+            'password'=>$password, 
+            'platform'=>'ios', 
+            'device'=>'']);
         try{
-            $this->response = $this->client->post('/auth/user/login', $this->reqHeaders);
+            $response = $this->client->post('/auth/user/login', $this->reqHeaders);
         } catch (ClientException $ce){
             $statusCode = $ce->getResponse()->getStatusCode();
             $statusMsg = $ce->getResponse()->getReasonPhrase();
@@ -49,7 +53,7 @@ class LibUniMelb implements ITimeCalendar{
         $timestamp = time();
         $this->reqHeaders['query'] = ['lastSyncTime'=>'', '_'=> $timestamp];
         try {
-            $this->response = $this->client->get('services/classTimetable', $this->reqHeaders);
+            $response = $this->client->get('services/classTimetable', $this->reqHeaders);
         } catch (ClientException $ce){
             $statusCode = $ce->getResponse()->getStatusCode();
             $statusMsg = $ce->getResponse()->getReasonPhrase();
@@ -59,7 +63,7 @@ class LibUniMelb implements ITimeCalendar{
             var_dump($e);
         }
 
-        $contents = $this->response->getBody()->getContents();
+        $contents = $response->getBody()->getContents();
         var_dump(json_decode($contents, true));
         return 'fetch';
     }

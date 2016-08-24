@@ -13,7 +13,7 @@ class CalendarTest extends \PHPUnit_Framework_TestCase{
 
     public function testMonash(){
         $cls = ITimeFactory::create(ITimeFactory::$LIB_MONASH);
-        $result = $cls->login('lx19930102', 'xli531');
+        $result = $cls->login('xli531', 'Lx19930102');
         $result = $cls->fetch();
         $this->assertEquals($result, 'fetch');
     }

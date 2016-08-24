@@ -28,13 +28,15 @@ class LibMonash implements ITimeCalendar{
         $loginForm = [
             'AuthMehod' => 'FormsAuthentication',
             'Kmsi' => 'true',
-            'UserName' => $userId,
-            'Password' => 'Monash\\'.$password,
+            'UserName' => 'Monash\\'.$userId,
+            'Password' => $password,
         ];
         $this->reqHeaders['allow_redirects'] = true;
         $this->reqHeaders['form_params'] = $loginForm;
         $response = $this->client->post($loginUrl, $this->reqHeaders);
-        var_dump($response);
+        if(!array_key_exists('Set-Cookie', $response->getHeaders())){
+            return 'failed'; 
+        }
         return 'login';
     }
 
@@ -46,6 +48,7 @@ class LibMonash implements ITimeCalendar{
         ];
         $response = $this->client->get($timetableUrl, $this->reqHeaders);
         $contents = $response->getBody()->getContents();
+        var_dump($contents);
         return 'fetch';
     }
 

@@ -69,30 +69,28 @@ class LibUniMelb implements ITimeCalendar{
         $this->reqHeaders['body'] = '';
         $timestamp = time();
         $this->reqHeaders['query'] = ['lastSyncTime'=>'', '_'=> $timestamp];
+        $ret = new ITimeRet();
         try {
             $response = $this->client->get('services/classTimetable', $this->reqHeaders);
         } catch (ClientException $ce){
             $statusCode = $ce->getResponse()->getStatusCode();
             $statusMsg = $ce->getResponse()->getReasonPhrase();
-            return array(
-                'status' => -1,
-                'info' => $statusMsg
-                );
+            $ret->status = -1;
+            $ret->info = $statusMsg;
+            return $ret;
         } catch (Exception $e){
             // other error
-            return array(
-                'status' => -2,
-                'info' => 'server error'
-                );
+            $ret->status = -2;
+            $ret->info = 'server error';
+            return $ret;
         }
 
         $contents = $response->getBody()->getContents();
         $jsonObj = json_decode($contents);
         if(!property_exists($jsonObj, 'classes')){
-            return array(
-                'status' => -3,
-                'info' => 'uni server error'
-                );
+            $ret->status = -3;
+            $ret->info = 'uni server error';
+            return $ret;
         }
         $classesCount = count($jsonObj->classes);
         $resultArr = [];
@@ -106,21 +104,19 @@ class LibUniMelb implements ITimeCalendar{
                 $address .= 'Building '.$timetableObj->buildingName;
                 $address .= ' ('.$timetableObj->buildingNumber.'), ';
                 $address .= 'Room '.$timetableObj->roomName;
-                $event = array(
-                    'title' => $classObj->fullTitle,
-                    'startTime' => $timetableObj->startDatetime,
-                    'endTime' => $timetableObj->endDatetime,
-                    'address' => $address
-                );
+                $event = (object)[];
+                $event->title = $classObj->fullTitle;
+                $event->startTime = $timetableObj->startDatetime;
+                $event->endTime = $timetableObj->endDatetime;
+                $event->address = $address;
                 array_push($resultArr, $event);
             }
         }
 
-        return array(
-            'status' => 1,
-            'info' => 'success',
-            'data' => $resultArr
-            );
+        $ret->status = 1;
+        $ret->info = 'success';
+        $ret->data = $resultArr;
+        return $ret;
     }
 }
 

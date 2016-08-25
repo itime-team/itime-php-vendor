@@ -34,10 +34,16 @@ class LibMonash implements ITimeCalendar{
         $this->reqHeaders['allow_redirects'] = true;
         $this->reqHeaders['form_params'] = $loginForm;
         $response = $this->client->post($loginUrl, $this->reqHeaders);
+
+        $ret = new ITimeRet();
         if(!array_key_exists('Set-Cookie', $response->getHeaders())){
-            return 'failed'; 
+            $ret->status = -1;
+            $ret->info = 'incorrect username or password';
+            return $ret;
         }
-        return 'login';
+        $ret->status = 1;
+        $ret->info = 'success';
+        return $ret;
     }
 
 
@@ -49,7 +55,37 @@ class LibMonash implements ITimeCalendar{
         $response = $this->client->get($timetableUrl, $this->reqHeaders);
         $contents = $response->getBody()->getContents();
         var_dump($contents);
-        return 'fetch';
+        $jsonObj = json_decode($contents);
+        $ret = new ITimeRet();
+        if(!property_exists($jsonObj, 'timetable')){
+            $ret->status = -1;
+            $ret->info = 'uni server error';
+            return $ret; 
+        }
+        $resultArr = [];
+        $timetableCount = count($jsonObj->timetable);
+        date_default_timezone_set('Australia/Melbourne');
+        for($i = 0; $i < $timetableCount; $i++){
+            $timetable = $jsonObj->timetable[$i];
+            $datesCount = count($timetable->dates);
+            $durationTimestamp = (int)$timetable->duration * 60;
+            for($j = 0; $j < $datesCount; $j++){
+                $date = $timetable->dates[$j];
+                $event = (object)[];
+                $event->startTime = $date . 'T' . $timetable->startTime;
+                $date = new \DateTime($event->startTime);
+                $event->startTime = date('c', $date->getTimestamp()); 
+                $endTimestamp = $date->getTimestamp() + $durationTimestamp;
+                $event->endTime = date('c', $endTimestamp);
+                array_push($resultArr, $event);
+            }
+        }
+
+        // var_dump($resultArr);
+        $ret->status = 1;
+        $ret->info = 'success';
+        $ret->data = $resultArr;
+        return $ret;
     }
 
 }

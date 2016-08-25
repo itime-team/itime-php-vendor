@@ -6,13 +6,13 @@ interface ITimeCalendar{
      * [login to the university system with univeristy official account]
      * @param  [string] $userId   [university account]
      * @param  [string] $password [university password]
-     * @return [array]          []
+     * @return [ITime\Calendar\ITimeRet]          []
      */
     public function login($userId, $password);
 
     /**
      * [fetch the calendar of university]
-     * @return [array]
+     * @return [ITime\Calendar\ITimeRet]
      */
     public function fetch();
  }

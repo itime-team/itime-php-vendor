@@ -54,7 +54,6 @@ class LibMonash implements ITimeCalendar{
         ];
         $response = $this->client->get($timetableUrl, $this->reqHeaders);
         $contents = $response->getBody()->getContents();
-        var_dump($contents);
         $jsonObj = json_decode($contents);
         $ret = new ITimeRet();
         if(!property_exists($jsonObj, 'timetable')){
@@ -77,11 +76,16 @@ class LibMonash implements ITimeCalendar{
                 $event->startTime = date('c', $date->getTimestamp()); 
                 $endTimestamp = $date->getTimestamp() + $durationTimestamp;
                 $event->endTime = date('c', $endTimestamp);
+                $event->address = $timetable->location;
+                if($timetable->description  == null){
+                    $event->title = $timetable->type . ' for ' . $timetable->unitCode;
+                }else{
+                    $event->title = $timetable->description;
+                }
                 array_push($resultArr, $event);
             }
         }
 
-        // var_dump($resultArr);
         $ret->status = 1;
         $ret->info = 'success';
         $ret->data = $resultArr;

@@ -6,7 +6,7 @@ ITime vendor
 "repositories": [
 	{
 	"type": "vcs",
-    "url": "https://github.com/itime-team/itime-unicalendar"
+    "url": "https://github.com/itime-team/itime-php-vendor"
 	}
 ],
 "require": {

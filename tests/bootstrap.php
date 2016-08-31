@@ -1,4 +1,4 @@
 <?php
-namespace ITime\Calendar\Test {
+namespace ITime\Test {
     require __DIR__ . '/../vendor/autoload.php';
 }

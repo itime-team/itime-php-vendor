@@ -1,6 +1,6 @@
 <?php
 
-namespace ITime\Calendar;
+namespace ITime\UniCalendar;
 
 use \GuzzleHttp\Cookie\CookieJar;
 use \GuzzleHttp\Client;

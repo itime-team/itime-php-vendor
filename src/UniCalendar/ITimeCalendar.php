@@ -1,5 +1,5 @@
 <?php 
-namespace ITime\Calendar;
+namespace ITime\UniCalendar;
  
 interface ITimeCalendar{
     /**

@@ -3,7 +3,8 @@
     "description": "itime univeristy calendar",
     "type": "library",
     "require": {
-        "guzzlehttp/guzzle": "^6.2"
+        "guzzlehttp/guzzle": "^6.2",
+        "google/apiclient": "1.0.*@beta"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -21,12 +22,14 @@
     "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
-            "ITime\\Calendar\\": "src/"
+            "ITime\\UniCalendar\\": "src/UniCalendar/",
+            "ITime\\Google\\": "src/Google/",
+            "ITime\\Facebook\\": "src/Facebook/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ITime\\Calendar\\Test\\": "tests/"
+            "ITime\\Test\\": "tests/"
         }
     }
 

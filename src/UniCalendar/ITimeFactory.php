@@ -1,6 +1,6 @@
 <?php
 
-namespace ITime\Calendar;
+namespace ITime\UniCalendar;
 
 class ITimeFactory {
 
@@ -26,7 +26,7 @@ class ITimeFactory {
             return $instance;
         }
         try{
-            $reflect = new \ReflectionClass('ITime\\Calendar\\'.ITimeFactory::$clsMap[$className]);
+            $reflect = new \ReflectionClass('ITime\\UniCalendar\\'.ITimeFactory::$clsMap[$className]);
             $instance = $reflect->newInstance();
         } catch (Exception $e){
             // var_dump($e);

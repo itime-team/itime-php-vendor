@@ -1,6 +1,6 @@
 <?php
 
-namespace ITime\Calendar;
+namespace ITime\UniCalendar;
 
 /**
  * the data format of itime

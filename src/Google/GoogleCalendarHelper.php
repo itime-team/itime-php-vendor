@@ -6,6 +6,7 @@ use \Google_Service_Calendar;
 class GoogleCalendarHelper{
     private $client;
     private $service;
+    
     public function __construct($client){
         $this->client = $client;
         date_default_timezone_set('Australia/Melbourne');

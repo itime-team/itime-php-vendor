@@ -60,7 +60,7 @@ class CalendarTest extends \PHPUnit_Framework_TestCase{
     //     $cls = new GoogleContactHelper($client);
     //     $ret = $cls->fetch();
     //     var_dump($ret);
-    //     $this->assertEquals(count($ret), 17);
+    //     $this->assertGreaterThan(count($ret), 17);
     // }
 
 
@@ -77,7 +77,6 @@ class CalendarTest extends \PHPUnit_Framework_TestCase{
             Google_Service_Calendar::CALENDAR
         ));
         $client->setAccessType('offline');
-        $client->setAccessType('offline');
         $client->setAccessToken($this->accessToken);
         if($client->isAccessTokenExpired()){
             $refreshToken = $client->getRefreshToken();
@@ -86,7 +85,8 @@ class CalendarTest extends \PHPUnit_Framework_TestCase{
         $cls = new GoogleCalendarHelper($client);
         $ret = $cls->fetch();
         file_put_contents($dirname. '/google_calendar.json', json_encode($ret));
-        var_dump($ret);
+        // var_dump($ret);
+        $this->assertGreaterThan(count($ret), 5);
     }
 
 

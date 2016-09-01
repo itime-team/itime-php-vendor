@@ -5,13 +5,14 @@ use \Google_Client;
 use \Google_Http_Request;
 use \SimpleXMLElement;
 class GoogleContactHelper{
+    private $client;
 
-    public function __construct() {
-
+    public function __construct($client) {
+        $this->client = $client;
     }
 
-    public function fetchContact($client){
-
+    public function fetch(){
+        $client = $this->client;
         $accessTokenJson = $client->getAccessToken();
         $arr = json_decode($accessTokenJson, true);
         $url = 'https://www.google.com/m8/feeds/contacts/default/full?';

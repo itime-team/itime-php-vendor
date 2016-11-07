@@ -6,9 +6,11 @@ class ITimeFactory {
 
     public static $LIB_UNIMELB = 'unimelb';
     public static $LIB_MONASH = 'monash';
+    public static $LIB_RMIT = 'rmit';
     private static $clsMap = array(
         'unimelb' => 'LibUniMelb',
         'monash' => 'LibMonash',
+        'rmit' => 'LibRMIT',
     );
 
     function __construct(){

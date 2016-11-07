@@ -4,7 +4,8 @@
     "type": "library",
     "require": {
         "guzzlehttp/guzzle": "^6.2",
-        "google/apiclient": "1.0.*@beta"
+        "google/apiclient": "1.0.*@beta",
+        "sunra/php-simple-html-dom-parser": "1.5.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

@@ -15,10 +15,10 @@ class CalendarTest extends \PHPUnit_Framework_TestCase{
     }
 
     public function testUniMelb(){
-        // $cls = ITimeFactory::create(ITimeFactory::$LIB_UNIMELB);
-        // $ret = $cls->login('mingyanx', 'xmy15234');
+        $cls = ITimeFactory::create(ITimeFactory::$LIB_UNIMELB);
+        $ret = $cls->login('mingyanx', 'xmy15234');
         // $ret = $cls->fetch();
-        // var_dump($ret);
+        var_dump($ret);
         // $this->assertEquals($ret->status, 1);
 
     }
@@ -31,9 +31,9 @@ class CalendarTest extends \PHPUnit_Framework_TestCase{
     }
 
     public function testRMIT(){
-        $cls = ITimeFactory::create(ITimeFactory::$LIB_RMIT);
-        $ret = $cls->login('s3463979', '123123');
-        var_dump($ret);
+        // $cls = ITimeFactory::create(ITimeFactory::$LIB_RMIT);
+        // $ret = $cls->login('s3463979', '123123');
+        // var_dump($ret);
         // $ret = $cls->fetch();
         // $this->assertEquals($ret->status, 1);
     }

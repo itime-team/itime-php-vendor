@@ -20,7 +20,6 @@
             "email": "yincd520@sina.com"
         }
     ],
-    "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
             "ITime\\UniCalendar\\": "src/UniCalendar/",

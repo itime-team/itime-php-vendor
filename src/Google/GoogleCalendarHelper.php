@@ -54,7 +54,6 @@ class GoogleCalendarHelper {
                 $event['invitee'] = [];
                 $event['iCalUID'] = $iCalUID;
                 $event['eventId'] = $item->id;
-                $event['summary'] = $item->summary;
                 $event['status'] = $item->status;
                 if ($item->status != 'cancelled') {
                     $event['startTime'] = strtotime($item->start->dateTime)*1000;
@@ -63,20 +62,25 @@ class GoogleCalendarHelper {
                     $currentTime = round(microtime(true) * 1000);
                     $event['startTime'] = $event['endTime'] = $currentTime;
                 }
-                if ($item->location != null) {
-                    $event['location'] = $item->location;
+                if ($item->summary == null) {
+                    $event['summary'] = '';
                 } else {
+                    $event['summary'] = $item->summary;
+                }
+                if ($item->location == null) {
                     $event['location'] = '';
-                }
-                if ($item->recurringEventId != null) {
-                    $event['recurringEventId'] = $item->recurringEventId;
                 } else {
+                    $event['location'] = $item->location;
+                }
+                if ($item->recurringEventId == null) {
                     $event['recurringEventId'] = '';
-                }
-                if ($item->recurrence != null) {
-                    $event['recurrence'] = $item->recurrence;
                 } else {
+                    $event['recurringEventId'] = $item->recurringEventId;
+                }
+                if ($item->recurrence == null) {
                     $event['recurrence'] = [];
+                } else {
+                    $event['recurrence'] = $item->recurrence;
                 }
                 $event['eventType'] = 'solo';
                 array_push($events, $event);

@@ -3,31 +3,30 @@ namespace ITime\Google;
 
 use \Google_Service_Calendar;
 
-class GoogleCalendarHelper{
+class GoogleCalendarHelper {
     private $client;
     private $service;
     
-    public function __construct($client){
+    public function __construct($client) {
         $this->client = $client;
-        date_default_timezone_set('Australia/Melbourne');
+        date_default_timezone_set('UTC'); // var_dump(date_default_timezone_get());
         $this->service = new Google_Service_Calendar($this->client);
     }
 
-    public function fetch(){
+    public function fetchCalendars() {
         $service = $this->service;
-        $calendarArr = [];
+        $calendars = [];
         $calendarList = $service->calendarList->listCalendarList();
         while(true) {
-            foreach ($calendarList->getItems() as $entry) {
-                // don't import national holiday
-                if(strpos($entry->id, '#holiday@') !== false){
+            foreach ($calendarList->getItems() as $item) {
+                // don't import holiday and contacts
+                if((strpos($item->id, '#holiday@') !== false) or (strpos($item->id, '#contacts@') !== false)){
                     continue;
                 }
-                $calObj = (object)[];
-                $calObj->id = $entry->id;
-                $calObj->title = $entry->summary;
-                $calObj->events = $this->listEvent($entry->id);
-                array_push($calendarArr, $calObj);
+                $calendar = [];
+                $calendar['iCalUID'] = $item->id;
+                $calendar['summary'] = $item->summary;
+                array_push($calendars, $calendar);
             }
             $pageToken = $calendarList->getNextPageToken();
             if ($pageToken) {
@@ -37,57 +36,57 @@ class GoogleCalendarHelper{
                 break;
             }
         }
-        return $calendarArr;
+        return $calendars;
     }
 
-    public function listEvent($calendarId){
+    public function fetchEvents($iCalUID, $syncToken){
         $service = $this->service;
-        $events = $service->events->listEvents($calendarId);
-        $eventArr = [];
-        while(true){
-            foreach($events->getItems() as $entry) {
-                $evtObj = (object)[];
-                $evtObj->id = $entry->id;
-                $evtObj->eventId = $entry->id;
-                $evtObj->title = $entry->summary;
-                $evtObj->status = $entry->status;
-                if($entry->status != 'cancelled'){
-                    $evtObj->startTime = $entry->start->dateTime;
-                    $evtObj->endTime = $entry->end->dateTime;
+        if ($syncToken == '') {
+            $eventList = $service->events->listEvents($iCalUID);
+        }
+        else
+            $eventList = $service->events->listEvents($iCalUID, ['syncToken' => $syncToken]);
+        $syncToken = $eventList->getNextSyncToken();
+        $events = [];
+        while (true) {
+            foreach ($eventList->getItems() as $item) {
+                $event = [];
+                $event['invitee'] = [];
+                $event['iCalUID'] = $iCalUID;
+                $event['eventId'] = $item->id;
+                $event['summary'] = $item->summary;
+                $event['status'] = $item->status;
+                if ($item->status != 'cancelled') {
+                    $event['startTime'] = strtotime($item->start->dateTime)*1000;
+                    $event['endTime'] = strtotime($item->end->dateTime)*1000;
+                } else {
+                    $currentTime = round(microtime(true) * 1000);
+                    $event['startTime'] = $event['endTime'] = $currentTime;
                 }
-                $evtObj->address = $entry->location;
-                $evtObj->hostEventId = $entry->recurringEventId;
-                if($entry->recurrence != null){
-                    $evtObj->repeatType = $entry->recurrence[0];
-                }else{
-                    $evtObj->repeatType = null;
+                $event['location'] = $item->location;
+                if ($item->recurringEventId != null) {
+                    $event['recurringEventId'] = $item->recurringEventId;
+                } else {
+                    $event['recurringEventId'] = '';
                 }
-                // parse attendees
-                $evtObj->attendees = [];
-                foreach($entry->attendees as $atd){
-                    $atdObj = (object)[];
-                    $atdObj->email = $atd->email;
-                    $atdObj->responseStatus = $atd->responseStatus;
-                    array_push($evtObj->attendees, $atdObj);
+                if ($item->recurrence != null) {
+                    $event['recurrence'] = $item->recurrence;
+                } else {
+                    $event['recurrence'] = [];
                 }
-                array_push($eventArr, $evtObj);
+                $event['eventType'] = 'solo';
+                array_push($events, $event);
             }
-            $pageToken = $events->getNextPageToken();
+            $pageToken = $eventList->getNextPageToken();
             if ($pageToken) {
                 $optParams = array('pageToken' => $pageToken);
-                $events = $service->events->listEvents($calendarId, $optParams);
+                $eventList = $service->events->listEvents($iCalUID, $optParams, ['syncToken' => $syncToken]);
+                $syncToken = $eventList->getNextSyncToken();
             } else {
                 break;
             }
         }
-        return $eventArr;
+        return array($events, $syncToken);
     }
-
-
-
-
-
-
-
 }
 

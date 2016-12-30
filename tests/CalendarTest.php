@@ -6,21 +6,34 @@ use ITime\Google\GoogleCalendarHelper;
 
 use \Google_Client;
 use \Google_Service_Calendar;
+
 class CalendarTest extends \PHPUnit_Framework_TestCase{
     private $accessToken;
     public function __construct(){
+        // var_dump('constructing ITime\Test\CalendarTest');
         parent::__construct();
-        $this->accessToken = '{"access_token":"ya29.Ci9QA-PB8hP8iubS5KzGf3HIU8U92qOxbE1NMYR-8CnMjLxrhI1fhYOxT791hOwpBw","token_type":"Bearer","expires_in":3600,"id_token":"eyJhbGciOiJSUzI1NiIsImtpZCI6ImVmMDgyMWExNWU4M2Q3YjM5MjU4ZTgyZTlmNWVhYjFlNzIzOGY4OTUifQ.eyJpc3MiOiJhY2NvdW50cy5nb29nbGUuY29tIiwiYXRfaGFzaCI6Ik5LM1dSSk0zY1ZVMUIxMkdYSHRlaUEiLCJhdWQiOiIxMDU4Nzk0ODQwMTE2LThoMmE0MGp2N2dvNWo4YjM3NmR1b3F1N3I5cGhnM29iLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwic3ViIjoiMTEyMzUzMjQ3MDczODc0MDc5OTQ1IiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImF6cCI6IjEwNTg3OTQ4NDAxMTYtOGgyYTQwanY3Z281ajhiMzc2ZHVvcXU3cjlwaGczb2IuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJlbWFpbCI6ImpvaG5jZHlpbkBnbWFpbC5jb20iLCJpYXQiOjE0NzI2Mjg2MTcsImV4cCI6MTQ3MjYzMjIxN30.G0udImb_dlMIez1zHSjVm6uXZnjr-KK5ubHkp1hH3cDSb3OSdYlkvZLaSYPwgLC3i-KD6JHQVrjIeZ5s3BtGYDcTKJxLBC6gOWRYcEFMs6vyq7qypVTxswfj7CYYTTkjpXOCrLOob9EFaxNH-MkPg6V4ooV-PqPDxxt_ZtEh31tkhEZAtJuZV4YUq5OlNVGBWR1n3KLtR4466HYRX34Xbk7v11FffZJx9bOUwTmrXEGuCxJFwTG4V-EM2UzxGK5cv2rN1V_EloGY4OgJnr9Txih7DRJ2dNSwUnhDcbYg9e4z-9jtocFpfbpq2Mz3Al3KSV9tXFVXR0FvD1fP9TVd5w","refresh_token":"1\/XP8yXL85cca_wU8d0y2pSagLMOJD1P1DAOqdgMm-Hyk","created":1472628617}';
-
+        $dirname = dirname(__FILE__);
+        
+        // $userTokenFilename = $dirname . '/xiaojiew1_tokens.json';
+        $userTokenFilename = $dirname . '/xiaojiew94_tokens.json';
+        $this->accessToken = file_get_contents($userTokenFilename);
+        
+        $this->eventSyncTokenFilename = $dirname . '/event_sync_tokens.json';
+        $this->eventSyncTokens = json_decode(file_get_contents($this->eventSyncTokenFilename), true);
+        // var_dump($this->eventSyncTokens['xiaojiew94@gmail.com']);
+        // file_put_contents($eventSyncTokenFilename, json_encode($this->eventSyncTokens));
     }
 
     public function testUniMelb(){
-        $cls = ITimeFactory::create(ITimeFactory::$LIB_UNIMELB);
-        $ret = $cls->login('mingyanx', 'xmy15234');
-        // $ret = $cls->fetch();
-        var_dump($ret);
-        // $this->assertEquals($ret->status, 1);
-
+        // $cls = ITimeFactory::create(ITimeFactory::$LIB_UNIMELB);
+        // // var_dump(gettype($cls), get_class($cls));
+        // $login_ret = $cls->login('xiaojiew1', 'wxj2016!');
+        // $fetch_ret = $cls->fetch();
+        // // var_dump($login_ret, $fetch_ret);
+        // $this->assertEquals($login_ret->status, 1);
+        // $this->assertEquals($login_ret->info, 'success');
+        // $this->assertEquals($fetch_ret->status, 1);
+        // $this->assertEquals($fetch_ret->info, 'success');
     }
 
     public function testMonash(){
@@ -74,49 +87,51 @@ class CalendarTest extends \PHPUnit_Framework_TestCase{
 
 
     public function testGoogleCalendar(){
-        // $client = new Google_Client();
-        // $dirname = dirname(__FILE__);
-        // $client->setAuthConfigFile($dirname . '/client_secrets.json');
-        // $client->setScopes(array(
-        //     'https://apps-apis.google.com/a/feeds/groups/',
-        //     'https://apps-apis.google.com/a/feeds/alias/',
-        //     'https://apps-apis.google.com/a/feeds/user/',
-        //     'https://www.google.com/m8/feeds/',
-        //     'https://www.google.com/m8/feeds/user/',
-        //     Google_Service_Calendar::CALENDAR
-        // ));
-        // $client->setAccessType('offline');
-        // $client->setAccessToken($this->accessToken);
-        // if($client->isAccessTokenExpired()){
-        //     $refreshToken = $client->getRefreshToken();
-        //     $client->refreshToken($refreshToken);
-        // }
-        // $cls = new GoogleCalendarHelper($client);
-        // $ret = $cls->fetch();
+        var_dump('testGoogleCalendar');
+        $client = new Google_Client();
+        $dirname = dirname(__FILE__);
+        $client->setAuthConfigFile($dirname . '/client_secrets.json');
+        $client->setScopes(array(
+            'https://apps-apis.google.com/a/feeds/groups/',
+            'https://apps-apis.google.com/a/feeds/alias/',
+            'https://apps-apis.google.com/a/feeds/user/',
+            'https://www.google.com/m8/feeds/',
+            'https://www.google.com/m8/feeds/user/',
+            Google_Service_Calendar::CALENDAR
+        ));
+        $client->setAccessType('offline');
+        $client->setAccessToken($this->accessToken);
+        if($client->isAccessTokenExpired()){
+            // var_dump('refresh token');
+            $refreshToken = $client->getRefreshToken();
+            $client->refreshToken($refreshToken);
+        }
+
+        // add to main project
+        $cls = new GoogleCalendarHelper($client);
+        $items = $cls->fetchCalendars(); // var_dump($items);
+
+        foreach ($items as $item) {
+            $iCalUID = $item['iCalUID']; var_dump('iCalUID: '.$iCalUID);
+            $extra = '{"sync_token":""}';
+            $extra = json_decode($extra);
+            $eventSyncToken = $extra->sync_token;
+
+            // add to main project
+            list($events, $eventSyncToken) = $cls->fetchEvents($iCalUID, $eventSyncToken);
+
+            $count = count($events);
+            var_dump($count); var_dump($events);
+            // return;
+        }
+
+        // list($ret, $syncTokens) = $cls->fetch($this->eventSyncTokens);
+        // file_put_contents($this->eventSyncTokenFilename, json_encode($syncTokens));
+        // var_dump($ret);
         // file_put_contents($dirname. '/google_calendar.json', json_encode($ret));
         // // var_dump($ret);
         // $this->assertGreaterThan(count($ret), 5);
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

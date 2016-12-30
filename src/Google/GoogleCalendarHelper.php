@@ -63,7 +63,11 @@ class GoogleCalendarHelper {
                     $currentTime = round(microtime(true) * 1000);
                     $event['startTime'] = $event['endTime'] = $currentTime;
                 }
-                $event['location'] = $item->location;
+                if ($item->location != null) {
+                    $event['location'] = $item->location;
+                } else {
+                    $event['location'] = '';
+                }
                 if ($item->recurringEventId != null) {
                     $event['recurringEventId'] = $item->recurringEventId;
                 } else {

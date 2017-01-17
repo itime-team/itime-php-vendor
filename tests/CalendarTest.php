@@ -14,8 +14,8 @@ class CalendarTest extends \PHPUnit_Framework_TestCase{
         parent::__construct();
         $dirname = dirname(__FILE__);
         
-        // $userTokenFilename = $dirname . '/xiaojiew1_tokens.json';
-        $userTokenFilename = $dirname . '/xiaojiew94_tokens.json';
+        $userTokenFilename = $dirname . '/xiaojiew1_tokens.json';
+        // $userTokenFilename = $dirname . '/xiaojiew94_tokens.json';
         $this->accessToken = file_get_contents($userTokenFilename);
         
         $this->eventSyncTokenFilename = $dirname . '/event_sync_tokens.json';
@@ -121,8 +121,13 @@ class CalendarTest extends \PHPUnit_Framework_TestCase{
             list($events, $eventSyncToken) = $cls->fetchEvents($iCalUID, $eventSyncToken);
 
             $count = count($events);
-            var_dump($count); var_dump($events);
-            // return;
+            var_dump($count.' events in total');
+            foreach ($events as $event) {
+                var_dump($event['summary']);
+                var_dump($event['startTime']);
+                var_dump($event['endTime']);
+                var_dump('--------------------------------');
+            }
         }
 
         // list($ret, $syncTokens) = $cls->fetch($this->eventSyncTokens);

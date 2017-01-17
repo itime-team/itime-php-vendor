@@ -59,6 +59,12 @@ class GoogleCalendarHelper {
                 if ($item->status != 'cancelled') {
                     $event['startTime'] = strtotime($item->start->dateTime)*1000;
                     $event['endTime'] = strtotime($item->end->dateTime)*1000;
+                    if (($event['startTime'] == 0) or ($event['endTime'] == 0)) {
+                        $event['startTime'] = strtotime($item->start->date)*1000;
+                        $event['endTime'] = $event['startTime'] + 24*60*60*1000;
+                        $event['startTime'] += 60*1000;
+                        $event['endTime'] -= 60*1000;
+                    }
                 } else {
                     $currentTime = round(microtime(true) * 1000);
                     $event['startTime'] = $event['endTime'] = $currentTime;

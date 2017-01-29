@@ -14,26 +14,30 @@ class CalendarTest extends \PHPUnit_Framework_TestCase{
         parent::__construct();
         $dirname = dirname(__FILE__);
         
-        $userTokenFilename = $dirname . '/xiaojiew1_tokens.json';
+        // $userTokenFilename = $dirname . '/xiaojiew1_tokens.json';
         // $userTokenFilename = $dirname . '/xiaojiew94_tokens.json';
-        $this->accessToken = file_get_contents($userTokenFilename);
-        
-        $this->eventSyncTokenFilename = $dirname . '/event_sync_tokens.json';
-        $this->eventSyncTokens = json_decode(file_get_contents($this->eventSyncTokenFilename), true);
+        // $this->accessToken = file_get_contents($userTokenFilename);
+        // $this->eventSyncTokenFilename = $dirname . '/event_sync_tokens.json';
+        // $this->eventSyncTokens = json_decode(file_get_contents($this->eventSyncTokenFilename), true);
         // var_dump($this->eventSyncTokens['xiaojiew94@gmail.com']);
         // file_put_contents($eventSyncTokenFilename, json_encode($this->eventSyncTokens));
     }
 
     public function testUniMelb(){
-        // $cls = ITimeFactory::create(ITimeFactory::$LIB_UNIMELB);
-        // // var_dump(gettype($cls), get_class($cls));
-        // $login_ret = $cls->login('xiaojiew1', 'wxj2016!');
-        // $fetch_ret = $cls->fetch();
-        // // var_dump($login_ret, $fetch_ret);
-        // $this->assertEquals($login_ret->status, 1);
-        // $this->assertEquals($login_ret->info, 'success');
-        // $this->assertEquals($fetch_ret->status, 1);
-        // $this->assertEquals($fetch_ret->info, 'success');
+        $cls = ITimeFactory::create(ITimeFactory::$LIB_UNIMELB);
+        // var_dump(gettype($cls), get_class($cls));
+        
+        // $loginRet = $cls->login('xiaojiew1', 'wxj2016!');
+        $loginRet = $cls->login('mingyanx', 'xmy15234');
+        var_dump($loginRet);
+        $fetchRet = $cls->fetch();
+        $events = $fetchRet->data;
+        var_dump(count($events));
+        
+        // $this->assertEquals($loginRet->status, 1);
+        // $this->assertEquals($loginRet->info, 'success');
+        // $this->assertEquals($fetchRet->status, 1);
+        // $this->assertEquals($fetchRet->info, 'success');
     }
 
     public function testMonash(){
@@ -86,7 +90,9 @@ class CalendarTest extends \PHPUnit_Framework_TestCase{
     // }
 
 
-    public function testGoogleCalendar(){
+    public function testGoogleCalendar() {
+        return;
+
         var_dump('testGoogleCalendar');
         $client = new Google_Client();
         $dirname = dirname(__FILE__);

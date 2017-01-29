@@ -4,7 +4,6 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "bfc879cd5e01d2d19d8f1a4c1b439866",
     "content-hash": "3919289e1b11cee28c07bb924524577d",
     "packages": [
         {
@@ -50,7 +49,7 @@
             "keywords": [
                 "google"
             ],
-            "time": "2014-09-30 19:33:59"
+            "time": "2014-09-30T19:33:59+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -58,12 +57,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "dfadff37efcfd42230eef1350009898b7b9af40a"
+                "reference": "443ca656dec18f3e5ea7751d2429fc2aeacf3ca2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/dfadff37efcfd42230eef1350009898b7b9af40a",
-                "reference": "dfadff37efcfd42230eef1350009898b7b9af40a",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/443ca656dec18f3e5ea7751d2429fc2aeacf3ca2",
+                "reference": "443ca656dec18f3e5ea7751d2429fc2aeacf3ca2",
                 "shasum": ""
             },
             "require": {
@@ -112,7 +111,7 @@
                 "rest",
                 "web service"
             ],
-            "time": "2016-12-15 09:53:31"
+            "time": "2017-01-16 17:41:59"
         },
         {
             "name": "guzzlehttp/promises",
@@ -321,7 +320,7 @@
                 "html",
                 "parser"
             ],
-            "time": "2016-05-20 11:21:15"
+            "time": "2016-05-20T11:21:15+00:00"
         }
     ],
     "packages-dev": [
@@ -331,12 +330,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/instantiator.git",
-                "reference": "416fb8ad1d095a87f1d21bc40711843cd122fd4a"
+                "reference": "68099b02b60bbf3b088ff5cb67bf506770ef9cac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/instantiator/zipball/416fb8ad1d095a87f1d21bc40711843cd122fd4a",
-                "reference": "416fb8ad1d095a87f1d21bc40711843cd122fd4a",
+                "url": "https://api.github.com/repos/doctrine/instantiator/zipball/68099b02b60bbf3b088ff5cb67bf506770ef9cac",
+                "reference": "68099b02b60bbf3b088ff5cb67bf506770ef9cac",
                 "shasum": ""
             },
             "require": {
@@ -377,7 +376,7 @@
                 "constructor",
                 "instantiate"
             ],
-            "time": "2016-03-31 10:24:22"
+            "time": "2017-01-23T09:23:06+00:00"
         },
         {
             "name": "fzaninotto/faker",
@@ -385,12 +384,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "e810abf70325f1f9973f24543811bd13c130bca0"
+                "reference": "03eb255d66bf1c11fccb4b4d1ed62fee70e3b6f4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/e810abf70325f1f9973f24543811bd13c130bca0",
-                "reference": "e810abf70325f1f9973f24543811bd13c130bca0",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/03eb255d66bf1c11fccb4b4d1ed62fee70e3b6f4",
+                "reference": "03eb255d66bf1c11fccb4b4d1ed62fee70e3b6f4",
                 "shasum": ""
             },
             "require": {
@@ -427,7 +426,7 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2016-12-20 09:44:09"
+            "time": "2017-01-05T16:44:55+00:00"
         },
         {
             "name": "hamcrest/hamcrest-php",
@@ -486,12 +485,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/padraic/mockery.git",
-                "reference": "4de7969f4664da3cef1ccd83866c9f59378c3371"
+                "reference": "214b8f79f115d4223de4a3ac81ebcfaf7dc6d12b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/padraic/mockery/zipball/4de7969f4664da3cef1ccd83866c9f59378c3371",
-                "reference": "4de7969f4664da3cef1ccd83866c9f59378c3371",
+                "url": "https://api.github.com/repos/padraic/mockery/zipball/214b8f79f115d4223de4a3ac81ebcfaf7dc6d12b",
+                "reference": "214b8f79f115d4223de4a3ac81ebcfaf7dc6d12b",
                 "shasum": ""
             },
             "require": {
@@ -543,7 +542,7 @@
                 "test double",
                 "testing"
             ],
-            "time": "2016-12-19 14:50:55"
+            "time": "2017-01-24T09:34:42+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",
@@ -642,7 +641,7 @@
                 }
             ],
             "description": "With this component, a library can provide support for annotations via DocBlocks or otherwise retrieve information that is embedded in a DocBlock.",
-            "time": "2016-09-30 07:12:33"
+            "time": "2016-09-30T07:12:33+00:00"
         },
         {
             "name": "phpdocumentor/type-resolver",
@@ -689,7 +688,7 @@
                     "email": "me@mikevanriel.com"
                 }
             ],
-            "time": "2016-11-25 06:54:22"
+            "time": "2016-11-25T06:54:22+00:00"
         },
         {
             "name": "phpspec/prophecy",
@@ -902,7 +901,7 @@
             "keywords": [
                 "template"
             ],
-            "time": "2015-06-21 13:50:34"
+            "time": "2015-06-21T13:50:34+00:00"
         },
         {
             "name": "phpunit/php-timer",
@@ -946,7 +945,7 @@
             "keywords": [
                 "timer"
             ],
-            "time": "2016-05-12 18:03:57"
+            "time": "2016-05-12T18:03:57+00:00"
         },
         {
             "name": "phpunit/php-token-stream",
@@ -1003,12 +1002,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "8ddd0ddeeeb21124d8273c989a75107ae805f3f5"
+                "reference": "7eb45205d27edd94bd2b3614085ea158bd1e2bca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/8ddd0ddeeeb21124d8273c989a75107ae805f3f5",
-                "reference": "8ddd0ddeeeb21124d8273c989a75107ae805f3f5",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/7eb45205d27edd94bd2b3614085ea158bd1e2bca",
+                "reference": "7eb45205d27edd94bd2b3614085ea158bd1e2bca",
                 "shasum": ""
             },
             "require": {
@@ -1067,7 +1066,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2016-12-13 21:21:04"
+            "time": "2017-01-26T16:15:36+00:00"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -1495,7 +1494,7 @@
             ],
             "description": "Library that helps with managing the version number of Git-hosted PHP projects",
             "homepage": "https://github.com/sebastianbergmann/version",
-            "time": "2015-06-21 13:59:46"
+            "time": "2015-06-21T13:59:46+00:00"
         },
         {
             "name": "symfony/css-selector",
@@ -1671,12 +1670,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "f8c054eea2921142bed49cc957260652f80958e3"
+                "reference": "7928849b226f065dae93ec0e8be3b829f73ba67b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/f8c054eea2921142bed49cc957260652f80958e3",
-                "reference": "f8c054eea2921142bed49cc957260652f80958e3",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/7928849b226f065dae93ec0e8be3b829f73ba67b",
+                "reference": "7928849b226f065dae93ec0e8be3b829f73ba67b",
                 "shasum": ""
             },
             "require": {
@@ -1718,7 +1717,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2016-12-13 09:39:51"
+            "time": "2017-01-21T17:10:26+00:00"
         },
         {
             "name": "webmozart/assert",

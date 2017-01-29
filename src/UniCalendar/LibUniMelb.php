@@ -76,30 +76,38 @@ class LibUniMelb implements ITimeCalendar{
             $ret->info = 'uni server error';
             return $ret;
         }
-        $classesCount = count($jsonObj->classes);
-        $resultArr = [];
-        for($i = 0; $i < $classesCount; $i++){
+        $numClasses = count($jsonObj->classes); // print($numClasses);
+        $events = [];
+        for($i = 0; $i < $numClasses; $i++){
             $classObj = $jsonObj->classes[$i];
-            // echo $classObj->fullTitle .'\n\r';
-            $timetableCount = count($classObj->classTimetables);
-            for($j = 0; $j < $timetableCount; $j++){
+            // var_dump($classObj); return;
+
+            $numTimetables = count($classObj->classTimetables);
+            for($j = 0; $j < $numTimetables; $j++){
+                $event = [];
+                $event['summary'] = $classObj->fullTitle;
+
                 $timetableObj = $classObj->classTimetables[$j];
                 $address = $timetableObj->locationDescription . ' Campus; ';
                 $address .= 'Building '.$timetableObj->buildingName;
                 $address .= ' ('.$timetableObj->buildingNumber.'), ';
                 $address .= 'Room '.$timetableObj->roomName;
-                $event = (object)[];
-                $event->title = $classObj->fullTitle;
-                $event->startTime = $timetableObj->startDatetime;
-                $event->endTime = $timetableObj->endDatetime;
-                $event->address = $address;
-                array_push($resultArr, $event);
+
+                $event['startTime'] = strtotime($timetableObj->startDatetime)*1000;
+                $event['endTime'] = strtotime($timetableObj->endDatetime)*1000;
+                $event['location'] = $address;
+                $event['invitee'] = [];
+                $event['recurrence'] = [];
+
+                array_push($events, $event);
             }
+
+            $numTimetables = count($classObj->classTimetables);
         }
 
         $ret->status = 1;
         $ret->info = 'success';
-        $ret->data = $resultArr;
+        $ret->data = $events;
         return $ret;
     }
 }

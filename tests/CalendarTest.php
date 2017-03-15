@@ -28,11 +28,15 @@ class CalendarTest extends \PHPUnit_Framework_TestCase{
         // var_dump(gettype($cls), get_class($cls));
         
         // $loginRet = $cls->login('xiaojiew1', 'wxj2016!');
+        $loginRet = $cls->login('mingyanx', 'wrong');
+        var_dump($loginRet);
+        
         $loginRet = $cls->login('mingyanx', 'xmy15234');
-        // var_dump($loginRet);
-        $fetchRet = $cls->fetch();
-        $events = $fetchRet->data;
-        var_dump(count($events));
+        var_dump($loginRet);
+        
+        // $fetchRet = $cls->fetch();
+        // $events = $fetchRet->data;
+        // var_dump(count($events));
         
         // $this->assertEquals($loginRet->status, 1);
         // $this->assertEquals($loginRet->info, 'success');

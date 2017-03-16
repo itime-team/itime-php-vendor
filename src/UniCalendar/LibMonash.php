@@ -76,11 +76,11 @@ class LibMonash implements ITimeCalendar{
                 $event->startTime = date('c', $date->getTimestamp()); 
                 $endTimestamp = $date->getTimestamp() + $durationTimestamp;
                 $event->endTime = date('c', $endTimestamp);
-                $event->address = $timetable->location;
+                $event->location = $timetable->location;
                 if($timetable->description  == null){
-                    $event->title = $timetable->type . ' for ' . $timetable->unitCode;
+                    $event->summary = $timetable->type . ' for ' . $timetable->unitCode;
                 }else{
-                    $event->title = $timetable->description;
+                    $event->summary = $timetable->description;
                 }
                 array_push($resultArr, $event);
             }

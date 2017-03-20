@@ -98,6 +98,7 @@ class LibUniMelb implements ITimeCalendar{
                 $event['location'] = $address;
                 $event['invitee'] = [];
                 $event['recurrence'] = [];
+                $event['reminder'] = 0;
 
                 array_push($events, $event);
             }

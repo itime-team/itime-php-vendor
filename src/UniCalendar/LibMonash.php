@@ -70,18 +70,21 @@ class LibMonash implements ITimeCalendar{
             $durationTimestamp = (int)$timetable->duration * 60;
             for($j = 0; $j < $datesCount; $j++){
                 $date = $timetable->dates[$j];
-                $event = (object)[];
-                $event->startTime = $date . 'T' . $timetable->startTime;
-                $date = new \DateTime($event->startTime);
-                $event->startTime = date('c', $date->getTimestamp()); 
+                $event = [];
+                $event['startTime'] = $date . 'T' . $timetable->startTime;
+                $date = new \DateTime($event['startTime']);
+                $event['startTime'] = date('c', $date->getTimestamp()); 
                 $endTimestamp = $date->getTimestamp() + $durationTimestamp;
-                $event->endTime = date('c', $endTimestamp);
-                $event->location = $timetable->location;
+                $event['endTime'] = date('c', $endTimestamp);
+                $event['location'] = $timetable->location;
                 if($timetable->description  == null){
-                    $event->summary = $timetable->type . ' for ' . $timetable->unitCode;
+                    $event['summary'] = $timetable->type . ' for ' . $timetable->unitCode;
                 }else{
-                    $event->summary = $timetable->description;
+                    $event['summary'] = $timetable->description;
                 }
+                $event['invitee'] = [];
+                $event['recurrence'] = [];
+                $event['reminder'] = 0;
                 array_push($resultArr, $event);
             }
         }

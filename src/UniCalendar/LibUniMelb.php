@@ -14,7 +14,7 @@ class LibUniMelb implements ITimeCalendar{
     public function __construct(){
         $this->jar = new CookieJar;
         $this->client = new Client(['cookies'=>$this->jar, 'base_uri' => 'https://api.its.unimelb.edu.au']);
-        $this->reqHeaders = ['headers'=>['Content-Type'=>'application/json']]; 
+        $this->reqHeaders = ['headers'=>['Content-Type'=>'application/json','Accept' => 'application/json']]; 
     }
 
     public function login($userId, $password){
@@ -52,7 +52,7 @@ class LibUniMelb implements ITimeCalendar{
     public function fetch(){
         $this->reqHeaders['body'] = '';
         $timestamp = time();
-        $this->reqHeaders['query'] = ['lastSyncTime'=>'', '_'=> $timestamp];
+        $this->reqHeaders['query'] = ['ver'=>'2.0', 'lastSyncTime'=>'', '_'=> $timestamp];
         $ret = new ITimeRet();
         try {
             $response = $this->client->get('services/classTimetable', $this->reqHeaders);
